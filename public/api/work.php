@@ -2,12 +2,10 @@
 
 require '../../app/common.php';
 
-/*
-$taskId = intval($_GET['task_id'] ?? 0);
+taskId = intval($_GET['task_id'] ?? 0);
 if ($taskId < 1) {
   throw new Exception('Invalid Task ID');
 }
-*/
 
 // 1. Go to the database and get all work associated with the $taskId
 $workArr = Work::getWorkByTaskId($task_id);
