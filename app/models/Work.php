@@ -42,7 +42,7 @@ class Work
 
     // 3. Run the query
     $success = $statement->execute(
-        [$taskId]
+        []
     );
 
     // 4. Handle the results
