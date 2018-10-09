@@ -10,7 +10,7 @@ if ($taskId < 1) {
 */
 
 // 1. Go to the database and get all work associated with the $taskId
-$workArr = Work::getWorkByTaskId();
+$workArr = Work::getWorkByTaskId($task_id);
 
 // 2. Convert to JSON
 $json = json_encode($workArr, JSON_PRETTY_PRINT);
