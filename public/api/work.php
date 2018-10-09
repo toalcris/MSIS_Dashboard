@@ -2,8 +2,8 @@
 
 require '../../app/common.php';
 
-taskId = intval($_GET['task_id'] ?? 0);
-if ($taskId < 1) {
+$task_id = intval($_GET['task_id'] ?? 0);
+if ($task_id < 1) {
   throw new Exception('Invalid Task ID');
 }
 
