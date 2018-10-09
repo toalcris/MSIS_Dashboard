@@ -2,7 +2,8 @@
 
 require '../../app/common.php';
 
-// 1. Go to the database and get all teams
+
+// 1. Go to the database and get all work associated with the $taskId
 $teams = Team::fetchAll();
 
 // 2. Convert to JSON
