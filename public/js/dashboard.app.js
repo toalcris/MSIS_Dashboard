@@ -55,7 +55,7 @@ var dashboardApp = new Vue({
         return 'alert-warning'
       }
     },
-    fetchTasks () {
+    fetchTasks (pid) {
       fetch('https://raw.githubusercontent.com/tag/iu-msis/dev/public/p1-tasks.json')
       .then( response => response.json() )
       .then( json => {dashboardApp.tasks = json} )
@@ -64,7 +64,7 @@ var dashboardApp = new Vue({
         console.log(err);
       })
     },
-    fetchProject () {
+    fetchProject (pid) {
       fetch('https://raw.githubusercontent.com/tag/iu-msis/dev/public/project1.json')
       .then( response => response.json() )
       .then( json => {dashboardApp.project = json} )
@@ -73,13 +73,35 @@ var dashboardApp = new Vue({
         console.log(err);
       })
     },
+    fetchProjectWork (pid) {
+      fetch('api/workHours.php?projectId='+pid)
+      .then( response => response.json() )
+      .then( json => {dashboardApp.project = json} )
+      .catch( err => {
+        console.log('PROJECT HOURS FETCH ERROR:');
+        console.log(err);
+      })
+    },
+    formatWorkHours(){
+      console.log(this.workHours);
+      this.workHours.forEach(
+        function(entry, index, arr){
+          entry.date = Date.parse(entry.date);
+          entry.hours = Number(entry.hours);
+          entry.runningTotalHours = entry.hours +
+          (index == 0 ? 0 : arr[index-1].runningTotalHours);
+        }
+      );
+      console.log(this.workHours);
+    },
     gotoTask(tid) {
       // alert ('Clicked: ' + tid)
       window.location = 'task.html?taskId=' + tid;
     }
   },
   created () {
-    this.fetchProject();
-    this.fetchTasks();
+    this.fetchProject(1);
+    this.fetchTasks(1);
+    this.fetchProjectWork(1);
   }
 })
